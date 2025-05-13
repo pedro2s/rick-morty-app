@@ -50,36 +50,7 @@
         :key="character.id"
         class="col-12 col-sm-6 col-md-4 col-lg-3"
       >
-        <q-card
-          class="character-card cursor-pointer"
-          @click="goToCharacter(character.id)"
-          bordered
-          v-ripple
-        >
-          <q-img :src="character.image" height="250px">
-            <div class="absolute-bottom-right bg-transparent">
-              <q-badge :color="useStatusColor(character.status)" class="q-mr-sm q-mb-sm">
-                {{ character.status }}
-              </q-badge>
-            </div>
-          </q-img>
-
-          <q-card-section>
-            <div class="text-h6 ellipsis">{{ character.name }}</div>
-            <div class="text-subtitle2">{{ character.species }}</div>
-          </q-card-section>
-
-          <q-card-section class="q-pt-none">
-            <div class="row items-center">
-              <q-icon name="place" color="primary" size="18px" class="q-mr-xs" />
-              <div class="ellipsis">{{ character.location.name }}</div>
-            </div>
-            <div class="row items-center q-mt-xs">
-              <q-icon name="home" color="primary" size="18px" class="q-mr-xs" />
-              <div class="ellipsis">{{ character.origin.name }}</div>
-            </div>
-          </q-card-section>
-        </q-card>
+        <CharacterCard :character="character" @click="goToCharacter(character.id)" />
       </div>
     </div>
 
@@ -101,9 +72,9 @@
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCharacters } from '@/composables/useRickAndMorty'
-import { useStatusColor } from '@/composables/useStatusColor'
 import type { CharacterFilter } from '@/types/rick-morty'
 import LoadingState from '@/components/LoadingState.vue'
+import CharacterCard from '@/components/CharacterCard.vue'
 
 const router = useRouter()
 const page = ref(1)
@@ -130,19 +101,3 @@ watch(page, () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 </script>
-
-<style scoped>
-.character-card {
-  transition: transform 0.3s ease;
-}
-
-.character-card:hover {
-  transform: translateY(-5px);
-}
-
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-</style>
