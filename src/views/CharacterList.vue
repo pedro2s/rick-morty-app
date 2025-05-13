@@ -57,8 +57,8 @@
           v-ripple
         >
           <q-img :src="character.image" height="250px">
-            <div class="absolute-bottom-right">
-              <q-badge :color="getStatusColor(character.status)" class="q-mr-sm q-mb-sm">
+            <div class="absolute-bottom-right bg-transparent">
+              <q-badge :color="useStatusColor(character.status)" class="q-mr-sm q-mb-sm">
                 {{ character.status }}
               </q-badge>
             </div>
@@ -101,6 +101,7 @@
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCharacters } from '@/composables/useRickAndMorty'
+import { useStatusColor } from '@/composables/useStatusColor'
 import type { CharacterFilter } from '@/types/rick-morty'
 
 const router = useRouter()
@@ -123,16 +124,7 @@ function goToCharacter(id: string) {
   router.push({ name: 'character-detail', params: { id } })
 }
 
-function getStatusColor(status: string): string {
-  switch (status) {
-    case 'Alive':
-      return 'positive'
-    case 'Dead':
-      return 'negative'
-    default:
-      return 'grey'
-  }
-}
+
 
 // Quando mudar o scroll da página para o topo
 watch(page, () => {

@@ -25,14 +25,14 @@
       <p class="text-h6">Personagem não encontrada</p>
     </div>
 
-    <div class="row q-col-gutter-lg">
+    <div v-else class="row q-col-gutter-lg">
       <!-- Lado esquerdo - Imagem e informação básica -->
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-5">
         <q-card class="character-image-card">
           <q-img :src="character?.image" height="350px">
             <div class="absolute-bottom-right bg-transparent">
               <q-badge class="q-mr-sm q-mb-sm status-badge">
-                {{ character?.status }}
+                {{ useStatusColor(character?.status) }}
               </q-badge>
             </div>
           </q-img>
@@ -79,7 +79,7 @@
       </div>
 
       <!-- Lado direito - Lista de episódios -->
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-7">
         <q-card class="episodes-card">
           <q-card-section>
             <div class="text-h6">
@@ -96,7 +96,7 @@
           <q-card-section>
             <q-list>
               <q-expansion-item
-                v-for="(episode, index) in character?.episode"
+                v-for="episode in character?.episode"
                 :key="episode.id"
                 expand-separator
                 :icon="getSeasonIcon(episode.episode)"
@@ -130,6 +130,7 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCharacter } from '@/composables/useRickAndMorty'
+import { useStatusColor } from '@/composables/useStatusColor'
 
 const router = useRouter()
 const route = useRoute()
@@ -155,4 +156,27 @@ function getSeasonIcon(episodeCode: string): string {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.character-image-card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.status-badge {
+  font-size: 16px;
+  padding: 4px 8px;
+}
+
+.episodes-card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.episode-item {
+  transition: background-color 0.3s ease;
+}
+
+.episode-item:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+</style>
