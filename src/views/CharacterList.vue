@@ -28,8 +28,8 @@
     </div>
 
     <div v-if="loading && page === 1" class="row q-mt-lg q-mb-lg">
-      <div class="col-12 flex flex-center">
-        <q-spinner-dots color="primary" size="40px" />
+      <div class="col-12">
+        <LoadingState message="Carregando personagens..." />
       </div>
     </div>
 
@@ -103,6 +103,7 @@ import { useRouter } from 'vue-router'
 import { useCharacters } from '@/composables/useRickAndMorty'
 import { useStatusColor } from '@/composables/useStatusColor'
 import type { CharacterFilter } from '@/types/rick-morty'
+import LoadingState from '@/components/LoadingState.vue'
 
 const router = useRouter()
 const page = ref(1)
@@ -123,8 +124,6 @@ function resetPage() {
 function goToCharacter(id: string) {
   router.push({ name: 'character-detail', params: { id } })
 }
-
-
 
 // Quando mudar o scroll da página para o topo
 watch(page, () => {
