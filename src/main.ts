@@ -9,6 +9,8 @@ import router from './router'
 import { Quasar } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
+import iconSet from 'quasar/icon-set/mdi-v7.js'
+import '@quasar/extras/mdi-v7/mdi-v7.css'
 
 // Apollo Client
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core'
@@ -47,7 +49,8 @@ app.use(Quasar, {
       info: '#31CCEC',
       warning: '#F2C037'
     }
-  }
+  },
+  iconSet: iconSet
 })
 
 app.use(apolloProvider)

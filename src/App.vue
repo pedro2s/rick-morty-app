@@ -1,85 +1,54 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <q-layout view="lHh lpR lFf">
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <q-header elevated class="glossy">
+      <q-toolbar>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+        <q-toolbar-title>
+          <q-btn flat no-caps no-wrap to="/">
+            <div class="row items-center no-wrap">
+              <img src="@/assets/rick-and-morty-logo.png" width="40" height="40" class="logo q-mr-sm" />
+              <div class="text-h6">Rick and Morty Explorer</div>
+            </div>
+          </q-btn>
+        </q-toolbar-title>
 
-  <RouterView />
+        <q-space />
+
+        <q-btn flat round dense icon="mdi-github" type="a" target="_blank" href="https://github.com/pedro2s/rick-morty-app" />
+      </q-toolbar>
+    </q-header>
+
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+
+    <q-footer elevated class="bg-dark text-white text-center">
+      <q-toolbar>
+        <q-toolbar-title>
+          Rick and Morty Explorer &copy; {{ new Date().getFullYear() }}
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
+
+  </q-layout>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<script setup lang="ts">
+</script>
 
+<style>
 .logo {
-  display: block;
-  margin: 0 auto 2rem;
+  animation: spin infinite 20s linear;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>
