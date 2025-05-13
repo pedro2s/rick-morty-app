@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import CharacteList from '../views/CharacterList.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,17 +7,26 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: CharacteList,
+      meta: {
+        title: 'Rick and Morty - Characters'
+      }
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: '/character/:id',
+      name: 'character-detail',
+      component: () => import('../views/CharacterDetail.vue'),
+      props: true,
+      meta: {
+        title: 'Rick and Morty - Character Detail'
+      }
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title as string || 'Rick and Morty App'
+  next()
 })
 
 export default router
