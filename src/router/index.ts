@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CharacteList from '../views/CharacterList.vue'
+import CharacterList from '../views/CharacterList.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,10 +7,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: CharacteList,
+      component: CharacterList,
       meta: {
-        title: 'Rick and Morty - Characters'
-      }
+        title: 'Rick and Morty - Characters',
+      },
     },
     {
       path: '/character/:id',
@@ -18,14 +18,14 @@ const router = createRouter({
       component: () => import('../views/CharacterDetail.vue'),
       props: true,
       meta: {
-        title: 'Rick and Morty - Character Detail'
-      }
+        title: 'Rick and Morty - Character Detail',
+      },
     },
   ],
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title as string || 'Rick and Morty App'
+  document.title = (to.meta.title as string) || 'Rick and Morty App'
   next()
 })
 

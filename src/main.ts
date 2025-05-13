@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-
 // Quasar
 import { Quasar } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'
@@ -14,7 +13,7 @@ import '@quasar/extras/mdi-v7/mdi-v7.css'
 
 // Apollo Client
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core'
-import { createApolloProvider } from '@vue/apollo-option'
+import { DefaultApolloClient } from '@vue/apollo-composable'
 
 // GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -25,15 +24,12 @@ const httpLink = createHttpLink({
 const apolloClient = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
-  connectToDevTools: true
-})
-
-// Apollo provider
-const apolloProvider = createApolloProvider({
-  defaultClient: apolloClient
+  connectToDevTools: true,
 })
 
 const app = createApp(App)
+
+app.provide(DefaultApolloClient, apolloClient)
 
 app.use(router)
 app.use(Quasar, {
@@ -47,11 +43,10 @@ app.use(Quasar, {
       positive: '#21BA45',
       negative: '#C10015',
       info: '#31CCEC',
-      warning: '#F2C037'
-    }
+      warning: '#F2C037',
+    },
   },
-  iconSet: iconSet
+  iconSet: iconSet,
 })
 
-app.use(apolloProvider)
 app.mount('#app')

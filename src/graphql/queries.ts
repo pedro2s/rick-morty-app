@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export const GET_CHARACTERS = gql`
   query GetCharacters($page: Int, $filter: FilterCharacter) {
-    characters(page: $page, filter $filter) {
+    characters(page: $page, filter: $filter) {
       info {
         count
         pages
@@ -26,8 +26,7 @@ export const GET_CHARACTERS = gql`
       }
     }
   }
-`;
-
+`
 
 export const GET_CHARACTER = gql`
   query GetCharacter($id: ID!) {
@@ -53,4 +52,4 @@ export const GET_CHARACTER = gql`
       }
     }
   }
-`;
+`
