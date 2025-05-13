@@ -11,8 +11,7 @@
     />
 
     <div v-if="loading" class="q-pa-xl column items-center">
-      <q-spinner-dots color="primary" size="40px" />
-      <div class="text-subtitle1 q-mt-md">Carregando detalhes do personagem...</div>
+      <LoadingState message="Carregando detalhes do personagem..." />
     </div>
 
     <div v-else-if="error" class="q-pa-xl text-center">
@@ -131,6 +130,7 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCharacter } from '@/composables/useRickAndMorty'
 import { useStatusColor } from '@/composables/useStatusColor'
+import LoadingState from '@/components/LoadingState.vue'
 
 const router = useRouter()
 const route = useRoute()
