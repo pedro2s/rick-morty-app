@@ -22,6 +22,13 @@
           flat
           round
           dense
+          :icon="isDark ? 'light_mode' : 'dark_mode'"
+          @click="toggleDarkMode()"
+        />
+        <q-btn
+          flat
+          round
+          dense
           icon="mdi-github"
           type="a"
           target="_blank"
@@ -44,7 +51,11 @@
   </q-layout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useTheme } from './composables/useTheme'
+
+const { isDark, toggleDarkMode } = useTheme()
+</script>
 
 <style scoped>
 .logo {
