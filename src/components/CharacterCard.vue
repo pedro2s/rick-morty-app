@@ -3,7 +3,7 @@
     <q-img :src="character.image" height="250px">
       <div class="absolute-bottom-right bg-transparent">
         <q-badge :color="useStatusColor(character.status)" class="q-mr-sm q-mb-sm">
-          {{ character.status }}
+          {{ translate('status.' + character.status) }}
         </q-badge>
       </div>
     </q-img>
@@ -29,6 +29,9 @@
 <script setup lang="ts">
 import { useStatusColor } from '@/composables/useStatusColor'
 import type { Character } from '@/types/rick-morty'
+import { useI18n } from '@/composables/useI18n'
+
+const { translate } = useI18n()
 
 defineProps<{
   character: Character
