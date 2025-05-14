@@ -30,8 +30,11 @@
         <q-card class="character-image-card">
           <q-img :src="character?.image" height="350px">
             <div class="absolute-bottom-right bg-transparent">
-              <q-badge class="q-mr-sm q-mb-sm status-badge">
-                {{ useStatusColor(character?.status) }}
+              <q-badge
+                class="q-mr-sm q-mb-sm status-badge"
+                :color="useStatusColor(character?.status)"
+              >
+                {{ translate('status.' + character.status) }}
               </q-badge>
             </div>
           </q-img>
@@ -130,7 +133,10 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCharacter } from '@/composables/useRickAndMorty'
 import { useStatusColor } from '@/composables/useStatusColor'
+import { useI18n } from '@/composables/useI18n'
 import LoadingState from '@/components/LoadingState.vue'
+
+const { translate } = useI18n()
 
 const router = useRouter()
 const route = useRoute()
