@@ -4,8 +4,8 @@
       <div class="col-12">
         <q-card class="bg-primary text-white">
           <q-card-section>
-            <div class="text-h6">Personagens de Rick and Morty</div>
-            <div class="text-subtitle2">Explore os personagens do multiverso!</div>
+            <div class="text-h6">{{ translate('characters.title') }}</div>
+            <div class="text-subtitle2">{{ translate('characters.subtitle') }}</div>
           </q-card-section>
         </q-card>
       </div>
@@ -16,7 +16,7 @@
           filled
           debounce="500"
           color="primary"
-          label="Buscar por nome"
+          :label="translate('characters.searchByName')"
           clearable
           @update:model-value="resetPage"
         >
@@ -28,8 +28,8 @@
     </div>
 
     <div v-if="loading && page === 1" class="row q-mt-lg q-mb-lg">
-      <div class="col-12 flex flex-center">
-        <q-spinner-dots color="primary" size="40px" />
+      <div class="col-12">
+        <LoadingState message="Carregando personagens..." />
       </div>
     </div>
 
@@ -50,36 +50,7 @@
         :key="character.id"
         class="col-12 col-sm-6 col-md-4 col-lg-3"
       >
-        <q-card
-          class="character-card cursor-pointer"
-          @click="goToCharacter(character.id)"
-          bordered
-          v-ripple
-        >
-          <q-img :src="character.image" height="250px">
-            <div class="absolute-bottom-right bg-transparent">
-              <q-badge :color="useStatusColor(character.status)" class="q-mr-sm q-mb-sm">
-                {{ character.status }}
-              </q-badge>
-            </div>
-          </q-img>
-
-          <q-card-section>
-            <div class="text-h6 ellipsis">{{ character.name }}</div>
-            <div class="text-subtitle2">{{ character.species }}</div>
-          </q-card-section>
-
-          <q-card-section class="q-pt-none">
-            <div class="row items-center">
-              <q-icon name="place" color="primary" size="18px" class="q-mr-xs" />
-              <div class="ellipsis">{{ character.location.name }}</div>
-            </div>
-            <div class="row items-center q-mt-xs">
-              <q-icon name="home" color="primary" size="18px" class="q-mr-xs" />
-              <div class="ellipsis">{{ character.origin.name }}</div>
-            </div>
-          </q-card-section>
-        </q-card>
+        <CharacterCard :character="character" @click="goToCharacter(character.id)" />
       </div>
     </div>
 
@@ -101,12 +72,16 @@
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCharacters } from '@/composables/useRickAndMorty'
-import { useStatusColor } from '@/composables/useStatusColor'
 import type { CharacterFilter } from '@/types/rick-morty'
+import { useI18n } from '@/composables/useI18n'
+import LoadingState from '@/components/LoadingState.vue'
+import CharacterCard from '@/components/CharacterCard.vue'
 
 const router = useRouter()
 const page = ref(1)
 const searchName = ref('')
+
+const { translate } = useI18n()
 
 const filter = computed<CharacterFilter>(() => {
   return {
@@ -124,26 +99,8 @@ function goToCharacter(id: string) {
   router.push({ name: 'character-detail', params: { id } })
 }
 
-
-
 // Quando mudar o scroll da página para o topo
 watch(page, () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 })
 </script>
-
-<style scoped>
-.character-card {
-  transition: transform 0.3s ease;
-}
-
-.character-card:hover {
-  transform: translateY(-5px);
-}
-
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-</style>

@@ -17,7 +17,7 @@ export function useCharacters(page: Ref<number>, filter: Ref<CharacterFilter>) {
       page: Math.max(1, page.value),
       filter: filter.value,
     }),
-    { fetchPolicy: 'cache-and-network' },
+    { fetchPolicy: 'no-cache' },
   )
 
   const characters = computed<Character[]>(() => result.value?.characters.results ?? [])

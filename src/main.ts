@@ -1,3 +1,4 @@
+// Estilos globais
 import './assets/main.css'
 
 import { createApp } from 'vue'
@@ -17,7 +18,7 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 
 // GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: 'https://rickandmortyapi.com/graphql',
+  uri: import.meta.env.VITE_APP_GRAPHQL_URL || 'https://rickandmortyapi.com/graphql',
 })
 
 // Apollo client

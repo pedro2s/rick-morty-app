@@ -11,8 +11,7 @@
     />
 
     <div v-if="loading" class="q-pa-xl column items-center">
-      <q-spinner-dots color="primary" size="40px" />
-      <div class="text-subtitle1 q-mt-md">Carregando detalhes do personagem...</div>
+      <LoadingState message="Carregando detalhes do personagem..." />
     </div>
 
     <div v-else-if="error" class="q-pa-xl text-center">
@@ -31,8 +30,11 @@
         <q-card class="character-image-card">
           <q-img :src="character?.image" height="350px">
             <div class="absolute-bottom-right bg-transparent">
-              <q-badge class="q-mr-sm q-mb-sm status-badge">
-                {{ useStatusColor(character?.status) }}
+              <q-badge
+                class="q-mr-sm q-mb-sm status-badge"
+                :color="useStatusColor(character?.status)"
+              >
+                {{ translate('status.' + character.status) }}
               </q-badge>
             </div>
           </q-img>
@@ -50,7 +52,7 @@
                 <q-icon name="person" color="primary" />
               </q-item-section>
               <q-item-section>
-                <q-item-label caption>Gênero</q-item-label>
+                <q-item-label caption>{{ translate('characters.gender') }}</q-item-label>
                 <q-item-label>{{ character?.gender }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -60,7 +62,7 @@
                 <q-icon name="category" color="primary" />
               </q-item-section>
               <q-item-section>
-                <q-item-label caption>Tipo</q-item-label>
+                <q-item-label caption>{{ translate('characters.type') }}</q-item-label>
                 <q-item-label>{{ character?.type }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -70,7 +72,7 @@
                 <q-icon color="primary" name="place" />
               </q-item-section>
               <q-item-section>
-                <q-item-label caption>Localização Atual</q-item-label>
+                <q-item-label caption>{{ translate('characters.location') }}</q-item-label>
                 <q-item-label>{{ character?.location.name }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -84,10 +86,11 @@
           <q-card-section>
             <div class="text-h6">
               <q-icon name="tv" class="q-mr-sm" />
-              Episódios
+              {{ translate('characters.episodes') }}
             </div>
             <div class="text-subtitle2">
-              {{ character?.name }} aparece em {{ character?.episode.length }} episódios
+              {{ character?.name }}
+              {{ translate('characters.appearsIn', { count: character?.episode.length }) }}
             </div>
           </q-card-section>
 
@@ -109,11 +112,11 @@
                   <q-card-section>
                     <div class="row items-center q-gutter-sm">
                       <q-icon name="event" color="primary" size="18px" />
-                      <div>Data de exibição: {{ episode.air_date }}</div>
+                      <div>{{ translate('episodes.airDate') }}: {{ episode.air_date }}</div>
                     </div>
                     <div class="row items-center q-gutter-sm q-mt-sm">
                       <q-icon name="tv" color="primary" size="18px" />
-                      <div>Código do episódio: {{ episode.episode }}</div>
+                      <div>{{ translate('episodes.episodeCode') }}: {{ episode.episode }}</div>
                     </div>
                   </q-card-section>
                 </q-card>
@@ -131,6 +134,10 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCharacter } from '@/composables/useRickAndMorty'
 import { useStatusColor } from '@/composables/useStatusColor'
+import { useI18n } from '@/composables/useI18n'
+import LoadingState from '@/components/LoadingState.vue'
+
+const { translate } = useI18n()
 
 const router = useRouter()
 const route = useRoute()
