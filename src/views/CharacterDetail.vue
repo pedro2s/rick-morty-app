@@ -52,7 +52,7 @@
                 <q-icon name="person" color="primary" />
               </q-item-section>
               <q-item-section>
-                <q-item-label caption>Gênero</q-item-label>
+                <q-item-label caption>{{ translate('characters.gender') }}</q-item-label>
                 <q-item-label>{{ character?.gender }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -62,7 +62,7 @@
                 <q-icon name="category" color="primary" />
               </q-item-section>
               <q-item-section>
-                <q-item-label caption>Tipo</q-item-label>
+                <q-item-label caption>{{ translate('characters.type') }}</q-item-label>
                 <q-item-label>{{ character?.type }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -72,7 +72,7 @@
                 <q-icon color="primary" name="place" />
               </q-item-section>
               <q-item-section>
-                <q-item-label caption>Localização Atual</q-item-label>
+                <q-item-label caption>{{ translate('characters.location') }}</q-item-label>
                 <q-item-label>{{ character?.location.name }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -86,10 +86,11 @@
           <q-card-section>
             <div class="text-h6">
               <q-icon name="tv" class="q-mr-sm" />
-              Episódios
+              {{ translate('characters.episodes') }}
             </div>
             <div class="text-subtitle2">
-              {{ character?.name }} aparece em {{ character?.episode.length }} episódios
+              {{ character?.name }}
+              {{ translate('characters.appearsIn', { count: character?.episode.length }) }}
             </div>
           </q-card-section>
 
@@ -111,11 +112,11 @@
                   <q-card-section>
                     <div class="row items-center q-gutter-sm">
                       <q-icon name="event" color="primary" size="18px" />
-                      <div>Data de exibição: {{ episode.air_date }}</div>
+                      <div>{{ translate('episodes.airDate') }}: {{ episode.air_date }}</div>
                     </div>
                     <div class="row items-center q-gutter-sm q-mt-sm">
                       <q-icon name="tv" color="primary" size="18px" />
-                      <div>Código do episódio: {{ episode.episode }}</div>
+                      <div>{{ translate('episodes.episodeCode') }}: {{ episode.episode }}</div>
                     </div>
                   </q-card-section>
                 </q-card>
