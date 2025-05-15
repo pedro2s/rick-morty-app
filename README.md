@@ -2,6 +2,8 @@
 
 Este projeto é uma aplicação web que consome a API GraphQL da série Rick and Morty para exibir informações sobre personagens e episódios.
 
+Veja online em [quasar-rickandmorty-app.netlify.app](https://quasar-rickandmorty-app.netlify.app/)
+
 ## Tecnologias utilizadas
 
 - Vue 3
@@ -20,17 +22,20 @@ Este projeto é uma aplicação web que consome a API GraphQL da série Rick and
 ## Como executar o projeto
 
 1. Clone o repositório
+
 ```
 git clone https://github.com/pedro2s/rick-morty-app.git
 cd rick-morty-app
 ```
 
 2. Instale as dependências
+
 ```
 npm install
 ```
 
 3. Execute o projeto em modo de desenvolvimento
+
 ```
 npm run dev
 ```
@@ -60,9 +65,11 @@ A aplicação consome a API GraphQL do Rick and Morty disponível em: https://ri
 ## Screenshots
 
 ### Página de Listagem
+
 ![Listagem de Personagens](./screenshots/character-list.png)
 
 ### Página de Detalhes
+
 ![Detalhes do Personagem](./screenshots/character-detail.png)
 
 ## Recursos adicionais
