@@ -18,6 +18,22 @@
 
         <q-space />
 
+        <q-select
+          v-model="currentLocale"
+          :options="localeOptions"
+          dense
+          borderless
+          emit-value
+          map-options
+          style="min-width: 120px"
+          @update:model-value="setLocale"
+          class="q-mr-md"
+        >
+          <template v-slot:prepend>
+            <q-icon name="mdi-translate" />
+          </template>
+        </q-select>
+
         <q-btn
           flat
           round
@@ -53,8 +69,15 @@
 
 <script setup lang="ts">
 import { useTheme } from './composables/useTheme'
+import { useI18n } from './composables/useI18n'
 
 const { isDark, toggleDarkMode } = useTheme()
+const { currentLocale, setLocale } = useI18n()
+
+const localeOptions = [
+  { label: 'Português', value: 'pt-BR' },
+  { label: 'English', value: 'en-US' },
+]
 </script>
 
 <style scoped>
